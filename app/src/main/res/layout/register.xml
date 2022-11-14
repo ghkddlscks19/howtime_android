@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity">
+
+
+
+    <EditText
+        android:id="@+id/studentNum"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="학번(ID)을 입력하세요."
+        ></EditText>
+
+    <Button
+        android:id="@+id/checkStudentNum"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="ID중복확인"
+        ></Button>
+
+    <EditText
+        android:id="@+id/regPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="PASSWORD를 입력하세요."
+        ></EditText>
+
+
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="이름을 입력하세요."
+        ></EditText>
+
+    <EditText
+        android:id="@+id/editNickname"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="닉네임을 입력하세요."
+        ></EditText>
+
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioGroup"
+        android:orientation="horizontal">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/man"
+            android:text="남성">
+        </RadioButton>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/woman"
+            android:text="여성">
+        </RadioButton>
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/editEmail"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="이메일을 입력하세요."
+        ></EditText>
+
+
+
+    <Button
+        android:id="@+id/sendEmail"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="메일보내기"
+        ></Button>
+
+    <Button
+        android:id="@+id/checkEmail"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="메일중복확인"
+        ></Button>
+
+    <EditText
+        android:id="@+id/editKey"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="인증번호를 입력하세요."
+        ></EditText>
+
+    <Button
+        android:id="@+id/certKey"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="인증하기"
+        ></Button>
+
+    <Button
+        android:id="@+id/reg"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="가입하기"
+        android:layout_gravity="center"
+        ></Button>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/text"
+        ></TextView>
+
+</LinearLayout>
