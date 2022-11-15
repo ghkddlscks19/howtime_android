@@ -12,7 +12,6 @@
         android:textSize="40dp"
         android:gravity="center"
         android:layout_margin="30dp">
-
     </TextView>
 
     <EditText

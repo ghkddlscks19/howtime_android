@@ -73,7 +73,12 @@
         android:text="이메일을 입력하세요."
         ></EditText>
 
-
+    <Button
+        android:id="@+id/checkEmail"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="메일중복확인"
+        ></Button>
 
     <Button
         android:id="@+id/sendEmail"
@@ -82,12 +87,6 @@
         android:text="메일보내기"
         ></Button>
 
-    <Button
-        android:id="@+id/checkEmail"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:text="메일중복확인"
-        ></Button>
 
     <EditText
         android:id="@+id/editKey"

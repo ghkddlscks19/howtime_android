@@ -15,4 +15,7 @@ public interface RetrofitAPI {
 
     @GET("check/student/")
     Call<Boolean> checkStudentNum(@Query("studentNum") String studentNum);
+
+    @GET("check/email/")
+    Call<Boolean> checkEmail(@Query("email") String email);
 }
