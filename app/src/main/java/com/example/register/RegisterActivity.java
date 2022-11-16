@@ -1,5 +1,6 @@
 package com.example.register;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.text.BoringLayout;
@@ -30,13 +31,15 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText studentNum, regPassword, checkPassword,
             editName, editNickname, editEmail, editKey;
-    Button checkStudentNum, sendEmail, certKey, reg, checkEmail;
+    Button checkStudentNum, sendEmail, certKey, reg, checkEmail, checkNickname;
     RadioGroup radioGroup;
     RadioButton radioMan, radioWoman;
-    String genderResult, code; //성별 결과 값 담을 변수
+    String genderResult = "", code; //code는 이메일 인증코드 담을 변수
+    Boolean completeStudentNum = false, completeEmail = false, completeCert = false, completeNickname = false;
+
     private final String MYIP = "http://192.168.2.28";
     private final String FRIP = "http://192.168.3.134";
-    private final String RESTIP = "http://192.168.0.49";
+    private final String RESTIP = "http://192.168.0.6";
     private final String BASEURL = RESTIP+":9090/member/";
     private RetrofitAPI retrofitAPI;
     @Override
@@ -60,9 +63,10 @@ public class RegisterActivity extends AppCompatActivity {
         regPassword = (EditText) findViewById(R.id.regPassword); //비밀번호 입력창
         editName = (EditText) findViewById(R.id.editName); //이름 입력창
         editNickname = (EditText) findViewById(R.id.editNickname); //닉네임 입력창
-        editEmail = (EditText) findViewById(R.id.editEmail);//이메일 입력창
-        editKey = (EditText) findViewById(R.id.editKey);//이메일 인증키 입력창
-        checkStudentNum = (Button) findViewById(R.id.checkStudentNum);//ID 중복확인 버튼
+        editEmail = (EditText) findViewById(R.id.editEmail); //이메일 입력창
+        editKey = (EditText) findViewById(R.id.editKey); //이메일 인증키 입력창
+        checkStudentNum = (Button) findViewById(R.id.checkStudentNum); //ID 중복확인 버튼
+        checkNickname = (Button) findViewById(R.id.checkNickname); //닉네임 중복확인 버튼
         sendEmail = (Button) findViewById(R.id.sendEmail);//이메일 보내기 버튼
         certKey = (Button) findViewById(R.id.certKey);//인증번호 확인 버튼
         reg = (Button) findViewById(R.id.reg); //가입하기 버튼
@@ -79,6 +83,15 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Log.e("ID중복확인버튼", "click!!");
                 checkStudentNum();
+            }
+        });
+
+        //닉네임 중복확인 이벤트
+        checkNickname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("닉네임중복확인버튼", "click!!");
+                checkNickname();
             }
         });
 
@@ -109,7 +122,15 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.e("가입하기", "click!!");
-                createMember();
+                if(completeStudentNum == false || regPassword.length() == 0 || editName.length() == 0 ||
+                editNickname.length() == 0 || genderResult.length() == 0 || completeEmail == false || completeCert == false){
+                    Toast.makeText(getApplicationContext(), "정보를 모두 입력해주세요", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getApplicationContext(), "정보를 모두 입력받음!!", Toast.LENGTH_SHORT).show();
+                    createMember();
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -125,6 +146,7 @@ public class RegisterActivity extends AppCompatActivity {
                     //GMailSender.sendMail(제목, 본문내용, 받는사람);
                     gmailSender.sendMail("시간어때 이메일 인증코드입니다.", gmailSender.getEmailCode(), editEmail.getText().toString());
                     Toast.makeText(getApplicationContext(), "이메일을 성공적으로 보냈습니다.", Toast.LENGTH_SHORT).show();
+                    sendEmail.setVisibility(View.INVISIBLE);
                 } catch (MessagingException e) {
                     Toast.makeText(getApplicationContext(), "인터넷 연결을 확인해주십시오", Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
@@ -141,6 +163,9 @@ public class RegisterActivity extends AppCompatActivity {
                 Log.e("인증하기", "click!!");
                 if (code.equals(editKey.getText().toString())) {
                     Toast.makeText(getApplicationContext(), "인증에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+                    completeCert = true;
+                    editKey.setFocusable(false);
+                    certKey.setVisibility(View.INVISIBLE);
                 } else {
                     Toast.makeText(getApplicationContext(), "인증에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                 }
@@ -159,12 +184,16 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "실패", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if(studentNum.length() != 10){
+                    Toast.makeText(getBaseContext(), "학번은 10자리입니다.", Toast.LENGTH_SHORT).show();
+                }
                 if(!response.body()){
                     Toast.makeText(getBaseContext(), "이미 가입한 ID입니다.", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(getBaseContext(), "성공", Toast.LENGTH_SHORT).show();
-//                    studentNum.setFocusable(false);
-//                    checkStudentNum.setVisibility(View.INVISIBLE);
+                    completeStudentNum = true;
+                    studentNum.setFocusable(false);
+                    checkStudentNum.setVisibility(View.INVISIBLE);
                 }
             }
 
@@ -175,6 +204,36 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
+    //닉네임 중복확인 메소드
+    private void checkNickname() {
+        Call<Boolean> call = retrofitAPI.checkNickname(editNickname.getText().toString());
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                Log.e("닉네임중복확인", "성공!!");
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getBaseContext(), "실패", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(!response.body()){
+                    Toast.makeText(getBaseContext(), "이미 가입한 닉네임 입니다.", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getBaseContext(), "성공", Toast.LENGTH_SHORT).show();
+                    completeNickname = true;
+                    editNickname.setFocusable(false);
+                    checkNickname.setVisibility(View.INVISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                Log.e("이메일중복확인", "실패");
+                t.printStackTrace();
+            }
+        });
+    }
+
     //이메일 중복확인 메소드
     private void checkEmail() {
         Call<Boolean> call = retrofitAPI.checkEmail(editEmail.getText().toString());
@@ -189,10 +248,11 @@ public class RegisterActivity extends AppCompatActivity {
                 if(!response.body()){
                     Toast.makeText(getBaseContext(), "이미 가입한 이메일 입니다.", Toast.LENGTH_SHORT).show();
                 }else{
-
                     Toast.makeText(getBaseContext(), "성공", Toast.LENGTH_SHORT).show();
-//                    editEmail.setFocusable(false);
-//                    checkEmail.setVisibility(View.INVISIBLE);
+                    completeEmail = true;
+                    editEmail.setFocusable(false);
+                    checkEmail.setVisibility(View.INVISIBLE);
+                    sendEmail.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -234,13 +294,18 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    //삼육대 이메일 형식 체크
     private Boolean sahmyookEmailCheck(String email) {
         int atnum = email.indexOf("@");
-        String sahmyookEmail = email.substring(atnum);
-        if (sahmyookEmail.equals("@syuin.ac.kr")) {
-            return true;
-        } else {
+        if (atnum == -1) {
             return false;
+        } else {
+            String sahmyookEmail = email.substring(atnum);
+            if (sahmyookEmail.equals("@syuin.ac.kr")) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }

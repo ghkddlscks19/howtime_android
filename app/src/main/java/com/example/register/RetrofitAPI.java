@@ -18,4 +18,10 @@ public interface RetrofitAPI {
 
     @GET("check/email/")
     Call<Boolean> checkEmail(@Query("email") String email);
+
+    @GET("check/nickname/")
+    Call<Boolean> checkNickname(@Query("nickname") String nickname);
+
+    @POST("login/")
+    Call<Boolean> checkLogin(@Query("studentNum") String studentNum, @Query("password") String password);
 }

@@ -46,6 +46,12 @@
         android:text="닉네임을 입력하세요."
         ></EditText>
 
+    <Button
+        android:id="@+id/checkNickname"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:text="닉네임중복확인"
+        ></Button>
 
     <RadioGroup
         android:layout_width="match_parent"
@@ -85,6 +91,7 @@
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:text="메일보내기"
+        android:visibility="invisible"
         ></Button>
 
 
