@@ -1,24 +1,26 @@
-package com.example.register;
+package com.example.register.member;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.text.BoringLayout;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.List;
+import com.example.register.R;
+import com.example.register.RetrofitAPI;
+import com.example.register.member.GmailSender;
+import com.example.register.member.LoginActivity;
+import com.example.register.member.Member;
+import com.example.register.member.MemberDTO;
 
 import javax.mail.MessagingException;
-import javax.mail.SendFailedException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,13 +41,15 @@ public class RegisterActivity extends AppCompatActivity {
 
     private final String MYIP = "http://192.168.2.28";
     private final String FRIP = "http://192.168.3.134";
-    private final String RESTIP = "http://192.168.0.6";
-    private final String BASEURL = RESTIP+":9090/member/";
+    private final String RESTIP = "http://172.16.153.21";
+    private final String BASEURL = FRIP+":9090/member/";
     private RetrofitAPI retrofitAPI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+        init();
+
         //레트로핏 설정
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASEURL)
@@ -58,23 +62,6 @@ public class RegisterActivity extends AppCompatActivity {
                 .permitDiskReads()
                 .permitDiskWrites()
                 .permitNetwork().build());
-
-        studentNum = (EditText) findViewById(R.id.studentNum); //학번입력창
-        regPassword = (EditText) findViewById(R.id.regPassword); //비밀번호 입력창
-        editName = (EditText) findViewById(R.id.editName); //이름 입력창
-        editNickname = (EditText) findViewById(R.id.editNickname); //닉네임 입력창
-        editEmail = (EditText) findViewById(R.id.editEmail); //이메일 입력창
-        editKey = (EditText) findViewById(R.id.editKey); //이메일 인증키 입력창
-        checkStudentNum = (Button) findViewById(R.id.checkStudentNum); //ID 중복확인 버튼
-        checkNickname = (Button) findViewById(R.id.checkNickname); //닉네임 중복확인 버튼
-        sendEmail = (Button) findViewById(R.id.sendEmail);//이메일 보내기 버튼
-        certKey = (Button) findViewById(R.id.certKey);//인증번호 확인 버튼
-        reg = (Button) findViewById(R.id.reg); //가입하기 버튼
-        checkEmail = (Button) findViewById(R.id.checkEmail); //메일 중복확인 버튼
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup); //성별 라디오 그룹
-        radioMan = (RadioButton) findViewById(R.id.man); //남성
-        radioWoman = (RadioButton) findViewById(R.id.woman); //여성
-
 
 
         //ID 중복확인 이벤트
@@ -172,6 +159,24 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void init() {
+        studentNum = (EditText) findViewById(R.id.studentNum); //학번입력창
+        regPassword = (EditText) findViewById(R.id.regPassword); //비밀번호 입력창
+        editName = (EditText) findViewById(R.id.editName); //이름 입력창
+        editNickname = (EditText) findViewById(R.id.editNickname); //닉네임 입력창
+        editEmail = (EditText) findViewById(R.id.editEmail); //이메일 입력창
+        editKey = (EditText) findViewById(R.id.editKey); //이메일 인증키 입력창
+        checkStudentNum = (Button) findViewById(R.id.checkStudentNum); //ID 중복확인 버튼
+        checkNickname = (Button) findViewById(R.id.checkNickname); //닉네임 중복확인 버튼
+        sendEmail = (Button) findViewById(R.id.sendEmail);//이메일 보내기 버튼
+        certKey = (Button) findViewById(R.id.certKey);//인증번호 확인 버튼
+        reg = (Button) findViewById(R.id.reg); //가입하기 버튼
+        checkEmail = (Button) findViewById(R.id.checkEmail); //메일 중복확인 버튼
+        radioGroup = (RadioGroup) findViewById(R.id.radioGroup); //성별 라디오 그룹
+        radioMan = (RadioButton) findViewById(R.id.man); //남성
+        radioWoman = (RadioButton) findViewById(R.id.woman); //여성
     }
     //학번 중복확인 메소드
     private void checkStudentNum() {

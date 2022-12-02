@@ -1,4 +1,4 @@
-package com.example.register;
+package com.example.register.member;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -16,7 +16,6 @@ public class Member {
         member.setNickname(nickname);
         member.setGender(gender);
         member.setEmail(email);
-
         return member;
     }
 

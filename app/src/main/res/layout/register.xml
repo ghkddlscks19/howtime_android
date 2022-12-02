@@ -6,7 +6,7 @@
     android:padding="10dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RegisterActivity">
+    tools:context=".member.RegisterActivity">
 
 
 
@@ -14,7 +14,7 @@
         android:id="@+id/studentNum"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="학번(ID)을 입력하세요."
+        android:hint="학번(ID)을 입력하세요."
         ></EditText>
 
     <Button
@@ -28,7 +28,7 @@
         android:id="@+id/regPassword"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="PASSWORD를 입력하세요."
+        android:hint="PASSWORD를 입력하세요."
         ></EditText>
 
 
@@ -36,21 +36,21 @@
         android:id="@+id/editName"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="이름을 입력하세요."
+        android:hint="이름을 입력하세요."
         ></EditText>
 
     <EditText
         android:id="@+id/editNickname"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="닉네임을 입력하세요."
+        android:hint="닉네임을 입력하세요."
         ></EditText>
 
     <Button
         android:id="@+id/checkNickname"
         android:layout_width="150dp"
         android:layout_height="40dp"
-        android:text="닉네임중복확인"
+        android:hint="닉네임중복확인"
         ></Button>
 
     <RadioGroup
@@ -76,7 +76,7 @@
         android:id="@+id/editEmail"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="이메일을 입력하세요."
+        android:hint="이메일을 입력하세요."
         ></EditText>
 
     <Button
@@ -99,7 +99,7 @@
         android:id="@+id/editKey"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="인증번호를 입력하세요."
+        android:hint="인증번호를 입력하세요."
         ></EditText>
 
     <Button

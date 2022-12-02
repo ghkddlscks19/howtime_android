@@ -11,13 +11,16 @@
         android:theme="@style/Theme.Register"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".LoginActivity"
+            android:name=".member.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="RegisterActivity"></activity>
+        <activity android:name=".member.RegisterActivity"></activity>
+        <activity android:name=".board.BoardCreateActivity"></activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".board.BoardDetailActivity"></activity>B
     </application>
 </manifest>

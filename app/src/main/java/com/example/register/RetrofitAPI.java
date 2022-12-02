@@ -1,5 +1,9 @@
 package com.example.register;
 
+import com.example.register.board.Board;
+import com.example.register.board.BoardDTO;
+import com.example.register.member.MemberDTO;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -13,6 +17,9 @@ public interface RetrofitAPI {
     @POST("create/")
     Call<MemberDTO> createMember(@Body MemberDTO memberDTO);
 
+    @GET("check/student/{studentnum}")
+    Call<List<MemberDTO>> loginMember(@Path("studentnum") String studentNum);
+
     @GET("check/student/")
     Call<Boolean> checkStudentNum(@Query("studentNum") String studentNum);
 
@@ -24,4 +31,17 @@ public interface RetrofitAPI {
 
     @POST("login/")
     Call<Boolean> checkLogin(@Query("studentNum") String studentNum, @Query("password") String password);
+
+    @POST("create/")
+    Call<BoardDTO> createBoard(@Body BoardDTO boardDTO);
+
+    @GET("create/all/")
+    Call<List<BoardDTO>> getBoard();
+
+    @GET("checkboard/{studentnum}")
+    Call<List<BoardDTO>> getBoard(@Path("studentnum") String studentNum);
+
+    @GET("create/{studentnum}")
+    Call<List<MemberDTO>> getMember(@Path("studentnum") String studentNum);
+
 }

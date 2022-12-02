@@ -1,4 +1,4 @@
-package com.example.register;
+package com.example.register.member;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;

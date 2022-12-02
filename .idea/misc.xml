@@ -3,10 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1105" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/drawable/ic_baseline_keyboard_backspace_24.xml" value="0.1105" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/drawable/ic_baseline_report_problem_24.xml" value="0.1105" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1105" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/drawable/ic_outline_forward_to_inbox_24.xml" value="0.1105" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/drawable/ic_outline_list_alt_24.xml" value="0.1105" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/add.xml" value="0.27395833333333336" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/boardcreate.xml" value="0.27395833333333336" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/chat.xml" value="0.1766304347826087" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/home.xml" value="0.1766304347826087" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/item_list.xml" value="0.27395833333333336" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/login.xml" value="0.14855072463768115" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/login_xml.xml" value="0.2708333333333333" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/main.xml" value="0.4" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/post.xml" value="0.1766304347826087" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/register.xml" value="0.264" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/report.xml" value="0.1766304347826087" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/report_menu.xml" value="0.1766304347826087" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/rrrrr.xml" value="0.264" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/write_detail.xml" value="0.16847826086956522" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/menu/bottom_menu.xml" value="0.146875" />
       </map>
     </option>
   </component>
