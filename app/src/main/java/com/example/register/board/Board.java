@@ -1,6 +1,7 @@
 package com.example.register.board;
 
 import com.example.register.member.Member;
+import com.example.register.member.MemberDTO;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -10,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.SimpleTimeZone;
 
 public class Board {
-    public Board(int id, String title, String content, String hashtag, int price, String createDate, String modifyDate, String requirement, String memberid) {
+    public Board(int id, String title, String content, String hashtag, int price, String createDate, String modifyDate, String requirement, MemberDTO memberid) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -56,7 +57,7 @@ public class Board {
 
     @SerializedName("memberid")
     @Expose
-    private String memberid;
+    private MemberDTO memberid;
 
 
     public int getId() {
@@ -120,11 +121,11 @@ public class Board {
         this.requirement = requirement;
     }
 
-    public String getMemberid() {
+    public MemberDTO getMemberid() {
         return memberid;
     }
 
-    public void setMemberid(String memberid) {
+    public void setMemberid(MemberDTO memberid) {
         this.memberid = memberid;
     }
 }

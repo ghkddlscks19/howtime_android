@@ -1,11 +1,13 @@
 package com.example.register.board;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.register.MainActivity;
 import com.example.register.R;
@@ -21,6 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BoardDetailActivity extends AppCompatActivity {
     TextView txtId, txtTitle, txtContent, txtHashtag1, txtHashtag2, txtCondition;
+    ImageButton btnBack;
     private final String MYIP = "http://192.168.2.28";
     private final String FRIP = "http://192.168.3.134";
     private final String RESTIP = "http://172.16.153.21";
@@ -38,7 +41,13 @@ public class BoardDetailActivity extends AppCompatActivity {
                 .build();
         retrofitAPI = retrofit.create(RetrofitAPI.class);
 
-        getBoard("2018101013");
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BoardDetailActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     private void init(){
         txtId = (TextView) findViewById(R.id.txtId);
@@ -47,22 +56,23 @@ public class BoardDetailActivity extends AppCompatActivity {
         txtHashtag1 = (TextView) findViewById(R.id.txtHashtag1);
         txtHashtag2 = (TextView) findViewById(R.id.txtHashtag2);
         txtCondition = (TextView) findViewById(R.id.txtCondition);
+        btnBack = (ImageButton) findViewById(R.id.btnBack);
     }
 
-    private void getBoard(String studentNum) {
-        Call<List<BoardDTO>> call = retrofitAPI.getBoard(studentNum);
+    private void getClickBoard(int id) {
+        Call<List<BoardReceivedDTO>> call = retrofitAPI.getClickBoard(id);
 
 
-        call.enqueue(new Callback<List<BoardDTO>>() {
+        call.enqueue(new Callback<List<BoardReceivedDTO>>() {
             @Override
-            public void onResponse(Call<List<BoardDTO>> call, Response<List<BoardDTO>> response) {
+            public void onResponse(Call<List<BoardReceivedDTO>> call, Response<List<BoardReceivedDTO>> response) {
                 if (!response.isSuccessful()) {
                     Log.e("Response", "실패!!!!!!!!");
                     return;
                 }
-                List<BoardDTO> board = response.body();
-                for(BoardDTO post : board) {
-                    txtId.setText(post.getMemberid());
+                List<BoardReceivedDTO> board = response.body();
+                for(BoardReceivedDTO post : board) {
+                    txtId.setText(post.getMemberId().getNickname());
                     txtTitle.setText(post.getTitle());
                     txtContent.setText(post.getContent());
                     txtHashtag1.setText(post.getHashtag());
@@ -71,7 +81,7 @@ public class BoardDetailActivity extends AppCompatActivity {
 
             }
             @Override
-            public void onFailure(Call<List<BoardDTO>> call, Throwable t) {
+            public void onFailure(Call<List<BoardReceivedDTO>> call, Throwable t) {
                 Log.e("Response", "실패!!!!!!!!");
             }
         });

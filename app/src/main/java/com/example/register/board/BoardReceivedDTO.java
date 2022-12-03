@@ -1,24 +1,13 @@
 package com.example.register.board;
 
-import com.example.register.member.MemberDTO;
+import com.example.register.member.Member;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class BoardDTO {
-    public BoardDTO(String title, String content, String hashtag, int price, String createDate, String modifyDate, String requirement, String memberId) {
-        this.title = title;
-        this.content = content;
-        this.hashtag = hashtag;
-        this.price = price;
-        this.createDate = createDate;
-        this.modifyDate = modifyDate;
-        this.requirement = requirement;
-        this.memberId = memberId;
-    }
-
+public class BoardReceivedDTO {
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -55,9 +44,20 @@ public class BoardDTO {
 
     @SerializedName("memberId")
     @Expose
-    private String memberId;
+    private Member memberId;
 
-    public int getId() {
+    public BoardReceivedDTO(String title, String content, String hashtag, int price, String createDate, String modifyDate, String requirement, Member memberId) {
+        this.title = title;
+        this.content = content;
+        this.hashtag = hashtag;
+        this.price = price;
+        this.createDate = createDate;
+        this.modifyDate = modifyDate;
+        this.requirement = requirement;
+        this.memberId = memberId;
+    }
+
+    public Integer getId() {
         return id;
     }
 
@@ -117,11 +117,11 @@ public class BoardDTO {
         this.requirement = requirement;
     }
 
-    public String getMemberId() {
+    public Member getMemberId() {
         return memberId;
     }
 
-    public void setMemberId(String memberId) {
+    public void setMemberId(Member memberId) {
         this.memberId = memberId;
     }
 }

@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -86,6 +85,7 @@ public class BoardCreateActivity extends AppCompatActivity {
     }
 
     private void createBoard() {
+
         BoardDTO boardDTO = new BoardDTO(editTitle.getText().toString(), editContent.getText().toString(),
                 "#"+editHashtag1.getText().toString()+"#"+editHashtag2.getText().toString(),
                 Integer.parseInt(editPrice.getText().toString()), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")), editCondition.getText().toString(), Member.getInstance().getStudentNum());
@@ -99,20 +99,9 @@ public class BoardCreateActivity extends AppCompatActivity {
                 if (!response.isSuccessful()) {
                     Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT);
                     return;
-                } else {
-                    boardDTO.setTitle(response.body().getTitle());
-                    boardDTO.setContent(response.body().getContent());
-                    boardDTO.setHashtag(response.body().getHashtag());
-                    boardDTO.setPrice(response.body().getPrice());
-                    boardDTO.setCreateDate(response.body().getCreateDate());
-                    boardDTO.setModifyDate(response.body().getModifyDate());
-                    boardDTO.setRequirement(response.body().getRequirement());
-                    boardDTO.setMemberid(response.body().getMemberid());
-                    Intent intent = new Intent(BoardCreateActivity.this, MainActivity.class);
-                    startActivity(intent);
                 }
-
-
+                Intent intent = new Intent(BoardCreateActivity.this, MainActivity.class);
+                startActivity(intent);
             }
 
             @Override

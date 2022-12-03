@@ -14,7 +14,6 @@ import com.example.register.MainActivity;
 import com.example.register.R;
 import com.example.register.RetrofitAPI;
 import com.example.register.board.BoardCreateActivity;
-import com.example.register.board.BoardDTO;
 
 import java.util.List;
 

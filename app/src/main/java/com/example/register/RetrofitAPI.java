@@ -1,7 +1,7 @@
 package com.example.register;
 
-import com.example.register.board.Board;
 import com.example.register.board.BoardDTO;
+import com.example.register.board.BoardReceivedDTO;
 import com.example.register.member.MemberDTO;
 
 import java.util.List;
@@ -36,12 +36,10 @@ public interface RetrofitAPI {
     Call<BoardDTO> createBoard(@Body BoardDTO boardDTO);
 
     @GET("create/all/")
-    Call<List<BoardDTO>> getBoard();
+    Call<List<BoardReceivedDTO>> getBoard();
 
-    @GET("checkboard/{studentnum}")
-    Call<List<BoardDTO>> getBoard(@Path("studentnum") String studentNum);
+    @GET("create/{id}")
+    Call<List<BoardReceivedDTO>> getClickBoard(@Path("id") int id);
 
-    @GET("create/{studentnum}")
-    Call<List<MemberDTO>> getMember(@Path("studentnum") String studentNum);
 
 }
