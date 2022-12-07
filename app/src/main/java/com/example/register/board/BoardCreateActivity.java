@@ -28,11 +28,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class BoardCreateActivity extends AppCompatActivity {
     private final String MYIP = "http://192.168.2.28";
     private final String FRIP = "http://192.168.3.134";
-    private final String RESTIP = "http://172.16.153.21";
-    private final String BASEURL = FRIP+":9090/board/";
+    private final String RESTIP = "http://172.16.153.145";
+    private final String BASEURL = RESTIP+":9090/board/";
     private RetrofitAPI retrofitAPI;
 
-    EditText editTitle, editContent, editCondition, editHashtag1, editHashtag2, editHashtag3, editHashtag4, editPrice;
+    EditText editTitle, editContent, editRequirement, editHashtag1, editHashtag2, editHashtag3, editHashtag4, editPrice;
     Button btnWrite;
     ImageButton btnBack;
     String sendStudentNum;
@@ -76,7 +76,7 @@ public class BoardCreateActivity extends AppCompatActivity {
     private void init() {
         editTitle = (EditText) findViewById(R.id.editTitle);
         editContent = (EditText) findViewById(R.id.editContent);
-        editCondition = (EditText) findViewById(R.id.editCondition);
+        editRequirement = (EditText) findViewById(R.id.editRequirement);
         editHashtag1 = (EditText) findViewById(R.id.editHashtag1);
         editHashtag2 = (EditText) findViewById(R.id.editHashtag2);
         editPrice = (EditText) findViewById(R.id.editPrice);
@@ -88,7 +88,7 @@ public class BoardCreateActivity extends AppCompatActivity {
 
         BoardDTO boardDTO = new BoardDTO(editTitle.getText().toString(), editContent.getText().toString(),
                 "#"+editHashtag1.getText().toString()+"#"+editHashtag2.getText().toString(),
-                Integer.parseInt(editPrice.getText().toString()), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")), editCondition.getText().toString(), Member.getInstance().getStudentNum());
+                Integer.parseInt(editPrice.getText().toString()), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")), editRequirement.getText().toString(), Member.getInstance().getStudentNum());
 
         Call<BoardDTO> call = retrofitAPI.createBoard(boardDTO);
 

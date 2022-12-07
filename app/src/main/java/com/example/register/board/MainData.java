@@ -6,12 +6,23 @@ public class MainData {
     private String Title;
     private String Date;
     private String Nname;
+    private int id;
 
-    public MainData(String tag, String title, String date, String nname) {
+
+    public MainData(String tag, String title, String date, String nname, int id) {
         Tag = tag;
         Title = title;
         Date = date;
         Nname = nname;
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTag() {

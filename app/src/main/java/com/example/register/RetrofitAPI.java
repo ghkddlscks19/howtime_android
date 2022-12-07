@@ -1,10 +1,14 @@
 package com.example.register;
 
+import com.example.register.board.Answer;
+import com.example.register.board.AnswerDTO;
+import com.example.register.board.AnswerReceivedDTO;
 import com.example.register.board.BoardDTO;
 import com.example.register.board.BoardReceivedDTO;
 import com.example.register.member.MemberDTO;
 
 import java.util.List;
+import java.util.Optional;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -38,8 +42,13 @@ public interface RetrofitAPI {
     @GET("create/all/")
     Call<List<BoardReceivedDTO>> getBoard();
 
-    @GET("create/{id}")
-    Call<List<BoardReceivedDTO>> getClickBoard(@Path("id") int id);
+    @GET("create/{boardid}")
+    Call<BoardReceivedDTO> getClickBoard(@Path("boardid") int boardId);
 
+    @POST("create/")
+    Call<AnswerDTO> createAnswer(@Body AnswerDTO answerDTO);
+
+    @GET("create/{boardid}")
+    Call<AnswerReceivedDTO> getAnswer(@Path("boardid") int boardId);
 
 }

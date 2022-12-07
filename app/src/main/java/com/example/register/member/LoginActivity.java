@@ -28,8 +28,8 @@ public class LoginActivity extends AppCompatActivity {
     Button btnLogin, btnRegister;
     private final String MYIP = "http://192.168.2.28";
     private final String FRIP = "http://192.168.3.134";
-    private final String RESTIP = "http://172.16.153.21";
-    private final String BASEURL = FRIP+":9090/member/";
+    private final String RESTIP = "http://172.16.153.145";
+    private final String BASEURL = RESTIP+":9090/member/";
     private RetrofitAPI retrofitAPI;
 
     @Override

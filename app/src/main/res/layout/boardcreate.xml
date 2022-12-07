@@ -95,7 +95,7 @@
                     android:hint="조건 : 여학우만 가능합니다."
                     android:textColor="@color/black"
                     android:textSize="15dp"
-                    android:id="@+id/editCondition"/>
+                    android:id="@+id/editRequirement"/>
 
 
                 <TextView

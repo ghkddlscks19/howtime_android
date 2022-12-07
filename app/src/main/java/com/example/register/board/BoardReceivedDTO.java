@@ -46,7 +46,8 @@ public class BoardReceivedDTO {
     @Expose
     private Member memberId;
 
-    public BoardReceivedDTO(String title, String content, String hashtag, int price, String createDate, String modifyDate, String requirement, Member memberId) {
+    public BoardReceivedDTO(int id, String title, String content, String hashtag, int price, String createDate, String modifyDate, String requirement, Member memberId) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.hashtag = hashtag;
@@ -59,6 +60,10 @@ public class BoardReceivedDTO {
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {

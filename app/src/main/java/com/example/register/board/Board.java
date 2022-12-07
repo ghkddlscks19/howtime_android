@@ -11,7 +11,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.SimpleTimeZone;
 
 public class Board {
-    public Board(int id, String title, String content, String hashtag, int price, String createDate, String modifyDate, String requirement, MemberDTO memberid) {
+
+    public Board(int id, String title, String content, String hashtag, int price, String createDate, String modifyDate, String requirement, MemberDTO memberId) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -20,7 +21,7 @@ public class Board {
         this.createDate = createDate;
         this.modifyDate = modifyDate;
         this.requirement = requirement;
-        this.memberid = memberid;
+        this.memberId = memberId;
     }
 
     @SerializedName("id")
@@ -55,9 +56,9 @@ public class Board {
     @Expose
     private String requirement;
 
-    @SerializedName("memberid")
+    @SerializedName("memberId")
     @Expose
-    private MemberDTO memberid;
+    private MemberDTO memberId;
 
 
     public int getId() {
@@ -121,11 +122,11 @@ public class Board {
         this.requirement = requirement;
     }
 
-    public MemberDTO getMemberid() {
-        return memberid;
+    public MemberDTO getMemberId() {
+        return memberId;
     }
 
-    public void setMemberid(MemberDTO memberid) {
-        this.memberid = memberid;
+    public void setMemberId(MemberDTO memberId) {
+        this.memberId = memberId;
     }
 }

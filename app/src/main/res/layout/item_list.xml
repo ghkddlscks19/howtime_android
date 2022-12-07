@@ -32,6 +32,12 @@
                 android:text="닉네임"
                 android:layout_alignParentRight="true"/>
 
+            <TextView
+                android:id="@+id/boardId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"/>
+
         </RelativeLayout>
 
         //TextView

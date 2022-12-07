@@ -41,8 +41,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private final String MYIP = "http://192.168.2.28";
     private final String FRIP = "http://192.168.3.134";
-    private final String RESTIP = "http://172.16.153.21";
-    private final String BASEURL = FRIP+":9090/member/";
+    private final String RESTIP = "http://172.16.153.145";
+    private final String BASEURL = RESTIP+":9090/member/";
     private RetrofitAPI retrofitAPI;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,14 +148,19 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //구글메일 객체
                 Log.e("인증하기", "click!!");
-                if (code.equals(editKey.getText().toString())) {
-                    Toast.makeText(getApplicationContext(), "인증에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-                    completeCert = true;
-                    editKey.setFocusable(false);
-                    certKey.setVisibility(View.INVISIBLE);
-                } else {
-                    Toast.makeText(getApplicationContext(), "인증에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                if(editKey.length() != 8){
+                    Toast.makeText(getApplicationContext(), "인증번호 8자리를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                }else{
+                    if (code.equals(editKey.getText().toString())) {
+                        Toast.makeText(getApplicationContext(), "인증에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+                        completeCert = true;
+                        editKey.setFocusable(false);
+                        certKey.setVisibility(View.INVISIBLE);
+                    } else {
+                        Toast.makeText(getApplicationContext(), "인증에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
+
             }
         });
 
@@ -178,6 +183,7 @@ public class RegisterActivity extends AppCompatActivity {
         radioMan = (RadioButton) findViewById(R.id.man); //남성
         radioWoman = (RadioButton) findViewById(R.id.woman); //여성
     }
+
     //학번 중복확인 메소드
     private void checkStudentNum() {
         Call<Boolean> call = retrofitAPI.checkStudentNum(studentNum.getText().toString());
@@ -189,17 +195,19 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "실패", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(studentNum.length() != 10){
+                if (studentNum.length() != 10) {
                     Toast.makeText(getBaseContext(), "학번은 10자리입니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    if(!response.body()){
+                        Toast.makeText(getBaseContext(), "이미 가입한 ID입니다.", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getBaseContext(), "성공", Toast.LENGTH_SHORT).show();
+                        completeStudentNum = true;
+                        studentNum.setFocusable(false);
+                        checkStudentNum.setVisibility(View.INVISIBLE);
+                    }
                 }
-                if(!response.body()){
-                    Toast.makeText(getBaseContext(), "이미 가입한 ID입니다.", Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(getBaseContext(), "성공", Toast.LENGTH_SHORT).show();
-                    completeStudentNum = true;
-                    studentNum.setFocusable(false);
-                    checkStudentNum.setVisibility(View.INVISIBLE);
-                }
+
             }
 
             @Override
@@ -221,14 +229,19 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(getBaseContext(), "실패", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(!response.body()){
-                    Toast.makeText(getBaseContext(), "이미 가입한 닉네임 입니다.", Toast.LENGTH_SHORT).show();
+                if(editNickname.length() == 0){
+                    Toast.makeText(getBaseContext(), "닉네임을 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(getBaseContext(), "성공", Toast.LENGTH_SHORT).show();
-                    completeNickname = true;
-                    editNickname.setFocusable(false);
-                    checkNickname.setVisibility(View.INVISIBLE);
+                    if(!response.body()){
+                        Toast.makeText(getBaseContext(), "이미 가입한 닉네임 입니다.", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getBaseContext(), "성공", Toast.LENGTH_SHORT).show();
+                        completeNickname = true;
+                        editNickname.setFocusable(false);
+                        checkNickname.setVisibility(View.INVISIBLE);
+                    }
                 }
+
             }
 
             @Override
