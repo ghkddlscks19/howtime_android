@@ -11,16 +11,23 @@
         android:theme="@style/Theme.Register"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".member.LoginActivity"
+            android:name=".activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".member.RegisterActivity"></activity>
-        <activity android:name=".board.BoardCreateActivity"></activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".board.BoardDetailActivity"></activity>B
+        <activity android:name=".activity.RegisterActivity"></activity>
+        <activity android:name=".activity.BoardCreateActivity"></activity>
+        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.BoardDetailActivity"></activity>
+        <activity android:name=".activity.BoardUpdateActivity"></activity>
+        <activity android:name=".activity.MyBoardActivity"></activity>
+        <activity android:name=".activity.ReportCreateActivity"></activity>
+        <activity android:name=".activity.ReportMainActivity"></activity>
+        <activity android:name=".activity.ReportDetailActivity" ></activity>
+        <activity android:name=".activity.ReportUpdateActivity"></activity>
+        <activity android:name=".activity.MyReportActivity"></activity>
     </application>
 </manifest>
