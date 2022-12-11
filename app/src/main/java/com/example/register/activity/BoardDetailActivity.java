@@ -6,9 +6,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +25,9 @@ import com.example.register.domain.BoardDTO;
 import com.example.register.domain.BoardReceivedDTO;
 import com.example.register.domain.Member;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,8 +36,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BoardDetailActivity extends AppCompatActivity {
     TextView txtMemberId, txtTitle, txtContent, txtPrice, txtHashtag1, txtHashtag2, txtRequirement;
-    ImageButton btnBack;
-    Button btnUpdate, btnDelete, btnMyBoard;
+    ImageButton btnBack, btnMenu;
+    Button btnMyBoard;
     String createDate, modifyDate;
     int boardId;
     private final String MYIP = "http://192.168.2.28";
@@ -63,48 +70,61 @@ public class BoardDetailActivity extends AppCompatActivity {
             }
         });
 
-        // 수정 버튼 눌렀을때
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
+        // 메뉴 클릭
+        btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                BoardDTO boardDTO = new BoardDTO(boardId,txtTitle.getText().toString(), txtContent.getText().toString(), "#"+txtHashtag1.getText().toString()+"#"+txtHashtag2.getText().toString()
-                , Integer.parseInt(txtPrice.getText().toString()), createDate, modifyDate, txtRequirement.getText().toString(), Member.getInstance().getStudentNum());
-                Intent intent = new Intent(BoardDetailActivity.this, BoardUpdateActivity.class);
-                intent.putExtra("boardId", String.valueOf(boardId));
-                intent.putExtra("boardDTO", boardDTO);
-                startActivity(intent);
-            }
-        });
+            public void onClick(final View view) {
+                final PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
 
-        // 삭제 버튼을 눌렀을때
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(BoardDetailActivity.this);
-                builder.setTitle("글삭제").setMessage("글을 삭제하시겠습니까?");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener(){
+                getMenuInflater().inflate(R.menu.menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int id)
-                    {
-                        deleteBoard();
-                        Intent intent = new Intent(BoardDetailActivity.this, MainActivity.class);
-                        startActivity(intent);
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+
+                        if (menuItem.getItemId() == R.id.btnEdit) {
+                            // 수정 클릭
+                            BoardDTO boardDTO = new BoardDTO(boardId,txtTitle.getText().toString(), txtContent.getText().toString(), "#"+txtHashtag1.getText().toString()+"#"+txtHashtag2.getText().toString()
+                                    , Integer.parseInt(txtPrice.getText().toString()), createDate, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")), txtRequirement.getText().toString(), Member.getInstance().getStudentNum());
+                            Intent intent = new Intent(BoardDetailActivity.this, BoardUpdateActivity.class);
+                            intent.putExtra("boardId", String.valueOf(boardId));
+                            intent.putExtra("boardDTO", boardDTO);
+                            startActivity(intent);
+
+                        } else if (menuItem.getItemId() == R.id.btnDelete) {
+                            // 삭제 클릭
+                            AlertDialog.Builder builder = new AlertDialog.Builder(BoardDetailActivity.this);
+                            builder.setTitle("글삭제").setMessage("글을 삭제하시겠습니까?");
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener(){
+                                @Override
+                                public void onClick(DialogInterface dialog, int id)
+                                {
+                                    deleteBoard();
+                                    Intent intent = new Intent(BoardDetailActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+                                @Override
+                                public void onClick(DialogInterface dialog, int id)
+                                {
+                                    makeText(getApplicationContext(), "Cancel Click", LENGTH_SHORT).show();
+                                }
+                            });
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+
+                        }
+
+                        return false;
                     }
                 });
-
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialog, int id)
-                    {
-                        makeText(getApplicationContext(), "Cancel Click", LENGTH_SHORT).show();
-                    }
-                });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
+                popupMenu.show();
             }
         });
 
     }
+
     private void init(){
         txtMemberId = (TextView) findViewById(R.id.txtMemberId);
         txtTitle = (TextView) findViewById(R.id.txtTitle);
@@ -114,11 +134,10 @@ public class BoardDetailActivity extends AppCompatActivity {
         txtHashtag2 = (TextView) findViewById(R.id.txtHashtag2);
         txtRequirement = (TextView) findViewById(R.id.txtRequirement);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
-        btnUpdate = (Button) findViewById(R.id.btnUpdate);
-        btnDelete = (Button) findViewById(R.id.btnDelete);
         btnMyBoard = (Button) findViewById(R.id.btnMyBoard);
         Intent boardIdIntent = getIntent();
         boardId = Integer.parseInt(boardIdIntent.getStringExtra("boardId"));
+        btnMenu = (ImageButton) findViewById(R.id.btnMenu);
     }
 
     // 게시글 클릭했을때
@@ -136,10 +155,8 @@ public class BoardDetailActivity extends AppCompatActivity {
 
                 BoardReceivedDTO board = response.body();
 
-
                 if(Member.getInstance().getStudentNum().equals(board.getMemberId().getStudentNum())){
-                    btnUpdate.setVisibility(View.VISIBLE);
-                    btnDelete.setVisibility(View.VISIBLE);
+                    btnMenu.setVisibility(View.VISIBLE);
                 }
 
                 txtMemberId.setText(board.getMemberId().getNickname());

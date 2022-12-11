@@ -41,10 +41,6 @@ public class BoardCreateActivity extends AppCompatActivity {
         setContentView(R.layout.board_create);
         getSupportActionBar().setTitle("글 생성");
         init();
-        if(Member.getInstance().getGender().equals("남성")){
-            editRequirement.setFocusable(false);
-        }
-
         //레트로핏 설정
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASEURL)

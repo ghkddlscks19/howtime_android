@@ -23,27 +23,28 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:src="@drawable/ic_baseline_keyboard_backspace_24" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnUpdate"
-            android:text="수정"
-            android:visibility="invisible"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnDelete"
-            android:text="삭제"
-            android:visibility="invisible"/>
 
         <TextView
-            android:layout_weight="4.5"
-            android:layout_width="wrap_content"
+            android:layout_width="54dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="115dp"
+            android:layout_weight="4.5"
             android:text="글 확인"
             android:textColor="#000000"
-            android:textSize="20dp"
-            android:layout_marginLeft="115dp"/>
+            android:textSize="20dp" />
+
+        <ImageButton
+            android:id="@+id/btnMenu"
+            android:scaleType="fitCenter"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:adjustViewBounds="true"
+            android:background="@color/white"
+            android:layout_marginLeft="150dp"
+            android:src="@drawable/menu"
+            android:visibility="invisible"
+            />
 
     </LinearLayout>
 
@@ -59,6 +60,10 @@
             android:orientation="vertical"
             android:padding="15dp">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,6 +79,7 @@
                 android:textSize="15dp"
                 android:id="@+id/txtMemberId"
                 />
+        </LinearLayout>
 
 
             <TextView
@@ -204,12 +210,12 @@
                 android:background="#000001"/>
 
             <ListView
-                android:dividerHeight="5dp"
-                android:divider="@color/black"
                 android:id="@+id/listView1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp" />
+                android:layout_height="62dp"
+                android:layout_marginTop="10dp"
+                android:divider="@color/black"
+                android:dividerHeight="5dp" />
 
         </LinearLayout>
 

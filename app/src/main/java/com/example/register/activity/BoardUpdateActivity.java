@@ -93,10 +93,6 @@ public class BoardUpdateActivity extends AppCompatActivity {
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnWrite = (Button) findViewById(R.id.btnWrite);
 
-        if(Member.getInstance().getGender().equals("남성")){
-            editRequirement.setFocusable(false);
-        }
-
         // 글 상세보기 값 받아오기
         Intent boardInfoIntent = getIntent();
         boardId = Integer.parseInt(boardInfoIntent.getStringExtra("boardId"));

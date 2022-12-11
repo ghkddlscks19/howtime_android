@@ -5,51 +5,49 @@
     android:padding="30dp"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="로그인"
-        android:textSize="40dp"
-        android:gravity="center"
-        android:layout_margin="30dp">
-    </TextView>
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo"
+        ></ImageView>
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:id="@+id/editId"
-        android:hint="ID를 입력하세요."
-        android:layout_margin="60dp"
+        android:hint="ID"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         ></EditText>
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:id="@+id/editPassword"
-        android:hint="PASSWORD를 입력하세요."
-        android:layout_margin="60dp"
+        android:hint="PASSWORD"
+        android:layout_gravity="center"
+        android:layout_marginBottom="40dp"
         ></EditText>
-    <LinearLayout
-        android:layout_width="match_parent"
+
+    <Button
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="30dp">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="로그인"
-            android:id="@+id/btnLogin"
-            ></Button>
+        android:text="로그인"
+        android:id="@+id/btnLogin"
+        android:layout_gravity="center"
+        android:layout_marginBottom="15dp"
+        ></Button>
 
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="회원가입">
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="회원가입">
 
-        </Button>
-
-    </LinearLayout>
-
+    </Button>
 
 </LinearLayout>

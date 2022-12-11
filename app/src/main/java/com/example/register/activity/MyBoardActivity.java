@@ -9,7 +9,10 @@ import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -56,7 +59,6 @@ public class MyBoardActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myboard);
-        getSupportActionBar().setTitle("내 글 보기");
 
         // 레트로핏 설정
         Retrofit retrofit = new Retrofit.Builder()

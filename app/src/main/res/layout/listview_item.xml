@@ -11,6 +11,12 @@
     android:id="@+id/editLayout">
 
 
+    <TextView
+        android:id="@+id/editid"
+        android:layout_width="15dp"
+        android:layout_height="8dp"
+        android:layout_weight="1"
+        android:visibility="invisible"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,12 +39,13 @@
 
     </LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
-        <TextView
+    </LinearLayout>
+
+    <TextView
             android:id="@+id/editcom"
             android:paddingTop="10dp"
             android:layout_width="match_parent"
@@ -47,7 +54,5 @@
             android:textSize="18dp"
 
             />
-
-    </LinearLayout>
 
 </LinearLayout>

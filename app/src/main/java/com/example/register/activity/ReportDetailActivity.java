@@ -7,9 +7,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -24,6 +26,9 @@ import com.example.register.domain.Member;
 import com.example.register.domain.ReportDTO;
 import com.example.register.domain.ReportReceivedDTO;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,8 +37,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ReportDetailActivity extends AppCompatActivity {
     TextView txtMemberId, txtTitle, txtContent, txtAttackerNickname;
-    ImageButton btnBack;
-    Button btnUpdate, btnDelete;
+    ImageButton btnBack, btnMenu;
     String createDate, modifyDate;
     int boardId;
     private final String MYIP = "http://192.168.2.28";
@@ -68,44 +72,56 @@ public class ReportDetailActivity extends AppCompatActivity {
             }
         });
 
-        // 수정 버튼 눌렀을때때
-        btnUpdate.setOnClickListener(new View.OnClickListener() {
+        // 메뉴 클릭
+        btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                ReportDTO reportDTO = new ReportDTO(boardId, txtTitle.getText().toString(), txtAttackerNickname.getText().toString()
-                , createDate, modifyDate, txtContent.getText().toString(), Member.getInstance().getStudentNum());
-                Intent intent = new Intent(ReportDetailActivity.this, ReportUpdateActivity.class);
-                intent.putExtra("boardId", String.valueOf(boardId));
-                intent.putExtra("reportDTO", reportDTO);
-                startActivity(intent);
-            }
-        });
+            public void onClick(final View view) {
+                final PopupMenu popupMenu = new PopupMenu(getApplicationContext(), view);
 
-        // 삭제 버튼을 눌렀을때
-        btnDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ReportDetailActivity.this);
-                builder.setTitle("글삭제").setMessage("글을 삭제하시겠습니까?");
-                builder.setPositiveButton("OK", new DialogInterface.OnClickListener(){
+                getMenuInflater().inflate(R.menu.menu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int id)
-                    {
-                        deleteReport();
-                        Intent intent = new Intent(ReportDetailActivity.this, MainActivity.class);
-                        startActivity(intent);
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+
+                        if (menuItem.getItemId() == R.id.btnEdit) {
+                            // 수정 클릭
+                            ReportDTO reportDTO = new ReportDTO(boardId, txtTitle.getText().toString(), txtAttackerNickname.getText().toString()
+                                    , createDate, LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")), txtContent.getText().toString(), Member.getInstance().getStudentNum());
+                            Intent intent = new Intent(ReportDetailActivity.this, ReportUpdateActivity.class);
+                            intent.putExtra("boardId", String.valueOf(boardId));
+                            intent.putExtra("reportDTO", reportDTO);
+                            startActivity(intent);
+
+                        } else if (menuItem.getItemId() == R.id.btnDelete) {
+                            // 삭제 클릭
+                            AlertDialog.Builder builder = new AlertDialog.Builder(ReportDetailActivity.this);
+                            builder.setTitle("글삭제").setMessage("글을 삭제하시겠습니까?");
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener(){
+                                @Override
+                                public void onClick(DialogInterface dialog, int id)
+                                {
+                                    deleteReport();
+                                    Intent intent = new Intent(ReportDetailActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                }
+                            });
+
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+                                @Override
+                                public void onClick(DialogInterface dialog, int id)
+                                {
+                                    makeText(getApplicationContext(), "Cancel Click", LENGTH_SHORT).show();
+                                }
+                            });
+                            AlertDialog alertDialog = builder.create();
+                            alertDialog.show();
+
+                        }
+
+                        return false;
                     }
                 });
-
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
-                    @Override
-                    public void onClick(DialogInterface dialog, int id)
-                    {
-                        makeText(getApplicationContext(), "Cancel Click", LENGTH_SHORT).show();
-                    }
-                });
-                AlertDialog alertDialog = builder.create();
-                alertDialog.show();
+                popupMenu.show();
             }
         });
 
@@ -117,8 +133,7 @@ public class ReportDetailActivity extends AppCompatActivity {
         txtContent = (TextView) findViewById(R.id.txtContent);
         txtAttackerNickname = (TextView) findViewById(R.id.txtAttackerNickname);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
-        btnUpdate = (Button) findViewById(R.id.btnUpdate);
-        btnDelete = (Button) findViewById(R.id.btnDelete);
+        btnMenu = (ImageButton) findViewById(R.id.btnMenu);
         Intent boardIdIntent = getIntent();
         boardId = Integer.parseInt(boardIdIntent.getStringExtra("boardId"));
     }
@@ -139,9 +154,9 @@ public class ReportDetailActivity extends AppCompatActivity {
                 ReportReceivedDTO board = response.body();
 
                 if(Member.getInstance().getStudentNum().equals(board.getMemberId().getStudentNum())){
-                    btnUpdate.setVisibility(View.VISIBLE);
-                    btnDelete.setVisibility(View.VISIBLE);
+                    btnMenu.setVisibility(View.VISIBLE);
                 }
+
                 txtMemberId.setText(board.getMemberId().getNickname());
                 txtTitle.setText(board.getTitle());
                 txtAttackerNickname.setText(board.getAttackerNickname());

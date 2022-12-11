@@ -10,6 +10,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -44,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnMyBoard, btnReportMain;
     RetrofitAPI retrofitAPI;
     FloatingActionButton add;
+    private MyBoardActivity myBoardActivity;
+    private ReportMainActivity reportMainActivity;
+    private MainActivity mainActivity;
     private final String MYIP = "http://192.168.2.28";
     private final String FRIP = "http://192.168.3.134";
     private final String RESTIP = "http://172.16.153.145";
@@ -54,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        getSupportActionBar().setTitle("전체 글 보기");
 
         //레트로핏 설정
         Retrofit retrofit = new Retrofit.Builder()
@@ -96,6 +100,29 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        // 네비게이션 바 설정
+//        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+//                switch (menuItem.getItemId()) {
+//                    case R.id.home:
+//                        setFrag(0);
+//                        break;
+//                    case R.id.writing:
+//                        setFrag(1);
+//                        break;
+//                    case R.id.report:
+//                        setFrag(2);
+//                        break;
+//                    default:
+//                        break;
+//                }
+//                return true;
+//            }
+//        });
+
+
+
     }
 
 
@@ -107,6 +134,11 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavi);
         btnMyBoard = (Button) findViewById(R.id.btnMyBoard);
         btnReportMain = (Button) findViewById(R.id.btnReportMain);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavi);
+        mainActivity = new MainActivity();
+        myBoardActivity = new MyBoardActivity();
+        reportMainActivity = new ReportMainActivity();
+//        setFrag(0);
     }
 
 
@@ -141,4 +173,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+//    // 프레그먼트 교체
+//    private void setFrag(int n){      //프래그먼트 교체가 일어나는 실행문
+//        fm = getSupportFragmentManager();
+//        ft = fm.beginTransaction();
+//        switch (n) {
+//            case 0:
+//                ft.replace(R.id.main_frame, mainActivity);
+//                ft.commit();
+//                break;
+//            case 1:
+//                ft.replace(R.id.main_frame, myBoardActivity);
+//                ft.commit();
+//                break;
+//            case 2:
+//                ft.replace(R.id.main_frame, reportMainActivity);
+//                ft.commit();
+//                break;
+//        }
+//    }
 }

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -35,6 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button checkStudentNum, sendEmail, certKey, reg, checkEmail, checkNickname;
     RadioGroup radioGroup;
     RadioButton radioMan, radioWoman;
+    ImageButton btnBack;
     String genderResult = "", code; //code는 이메일 인증코드 담을 변수
     Boolean completeStudentNum = false, completeEmail = false, completeCert = false, completeNickname = false;
 
@@ -164,6 +166,15 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+        // 뒤로가기 클릭
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private void init() {
@@ -182,6 +193,7 @@ public class RegisterActivity extends AppCompatActivity {
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup); //성별 라디오 그룹
         radioMan = (RadioButton) findViewById(R.id.man); //남성
         radioWoman = (RadioButton) findViewById(R.id.woman); //여성
+        btnBack = (ImageButton) findViewById(R.id.btnBack);
     }
 
     //학번 중복확인 메소드

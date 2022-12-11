@@ -4,25 +4,18 @@
         android:id="@+id/home"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="Home" />
+        android:title="홈" />
 
     <item
-        android:id="@+id/post"
+        android:id="@+id/writing"
         android:enabled="true"
-        android:icon="@drawable/ic_outline_list_alt_24"
-        android:title="Post" />
-
-    <item
-        android:id="@+id/chat"
-        android:enabled="true"
-        android:icon="@drawable/ic_outline_forward_to_inbox_24"
-        android:title="Chat" />
+        android:icon="@drawable/ic_baseline_format_list_bulleted_24"
+        android:title="내 글" />
 
     <item
         android:id="@+id/report"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_report_problem_24"
-        android:title="Report" />
-
+        android:icon="@drawable/ic_baseline_report_24"
+        android:title="신고게시판" />
 
 </menu>

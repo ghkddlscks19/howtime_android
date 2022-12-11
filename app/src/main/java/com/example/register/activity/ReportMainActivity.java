@@ -105,7 +105,7 @@ public class ReportMainActivity extends AppCompatActivity {
                 Log.e("Response", "성공!!!!!!!!");
                 List<ReportReceivedDTO> board = response.body();
                 for(ReportReceivedDTO post : board) {
-                    arrayList.add(new ReportData(post.getTitle(), post.getCreateDate(), post.getMemberId().getNickname(), post.getId()));
+                    arrayList.add(new ReportData(post.getTitle(), post.getModifyDate(), post.getMemberId().getNickname(), post.getId()));
                 }
                 reportAdapter = new ReportAdapter(arrayList);
                 recyclerView.setAdapter(reportAdapter);
