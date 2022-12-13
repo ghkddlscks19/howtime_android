@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -56,7 +57,7 @@ public class BoardDetailActivity extends AppCompatActivity {
     private String TAG_REPORT = "report_fragment";
     private String TAG_MYREPORT = "myreport_fragment";
     private TextView txtMemberId, txtTitle, txtContent, txtPrice, txtHashtag1, txtHashtag2, txtRequirement, txtAnswer;
-    private ImageButton btnBack, btnMenu, btnSend, imabtnMenu;
+    private ImageButton btnBack, btnMenu, btnSend;
     private String createDate, modifyDate;
     private int boardId;
     private EditText con;
@@ -85,11 +86,12 @@ public class BoardDetailActivity extends AppCompatActivity {
                 .build();
         retrofitAPI = retrofit.create(RetrofitAPI.class);
 
+        listarr.clear();
         getClickBoard(boardId);
         getAnswer(boardId);
 
 
-//        txtAnswer.setText("댓글 "+ listViewAdapter.getCount() +"개");
+        txtAnswer.setText("댓글 "+ listarr.size() +"개");
 
         // 뒤로가기 버튼 눌렀을때
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +99,7 @@ public class BoardDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(BoardDetailActivity.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
             }
         });
 
@@ -119,6 +122,7 @@ public class BoardDetailActivity extends AppCompatActivity {
                             intent.putExtra("boardId", String.valueOf(boardId));
                             intent.putExtra("boardDTO", boardDTO);
                             startActivity(intent);
+                            overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
 
                         } else if (menuItem.getItemId() == R.id.btnDelete) {
                             // 삭제 클릭
@@ -131,6 +135,7 @@ public class BoardDetailActivity extends AppCompatActivity {
                                     deleteBoard();
                                     Intent intent = new Intent(BoardDetailActivity.this, MainActivity.class);
                                     startActivity(intent);
+                                    overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
                                 }
                             });
 
@@ -188,7 +193,6 @@ public class BoardDetailActivity extends AppCompatActivity {
         listarr = new ArrayList<>();
         listView1 = (ListView) findViewById(R.id.listView1);
         txtAnswer = (TextView) findViewById(R.id.txtAnswer);
-        imabtnMenu = (ImageButton) findViewById(R.id.imabtnMenu);
     }
 
     // 게시글 클릭했을때
@@ -243,7 +247,6 @@ public class BoardDetailActivity extends AppCompatActivity {
                     Log.e("Response", "실패!!!!!!!!");
                     return;
                 }
-
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {

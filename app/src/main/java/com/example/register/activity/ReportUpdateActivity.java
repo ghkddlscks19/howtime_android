@@ -70,6 +70,7 @@ public class ReportUpdateActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ReportUpdateActivity.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
             }
         });
 
@@ -84,6 +85,7 @@ public class ReportUpdateActivity extends AppCompatActivity {
                     updateReport();
                     Intent intent = new Intent(ReportUpdateActivity.this, ReportMainActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
                 }
 
             }

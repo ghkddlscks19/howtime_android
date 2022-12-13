@@ -78,6 +78,7 @@ public class SearchDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent= new Intent(SearchDetailActivity.this , MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
             }
         });
 
@@ -124,8 +125,7 @@ public class SearchDetailActivity extends AppCompatActivity {
                 if(arrayList.isEmpty()){
                     AlertDialog.Builder dlg = new AlertDialog.Builder(SearchDetailActivity.this);
                     dlg.setTitle("검색정보"); //제목
-                    dlg.setMessage("검색한 내용의 결과가 없습니다."); // 메시지
-//                버튼 클릭시 동작
+                    dlg.setMessage("검색한 내용의 결과가 없습니다."); // 메시지버튼 클릭시 동작
                     dlg.setPositiveButton("확인",new DialogInterface.OnClickListener(){
                         public void onClick(DialogInterface dialog, int which) {
 
@@ -177,7 +177,6 @@ public class SearchDetailActivity extends AppCompatActivity {
                         }
                     });
                     dlg.show();
-                    search = false;
                 }
 
             }

@@ -10,6 +10,7 @@
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/drawable/ic_baseline_keyboard_backspace_24.xml" value="0.1105" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/drawable/ic_baseline_report_24.xml" value="0.201" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/drawable/ic_baseline_report_problem_24.xml" value="0.1105" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.107" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1105" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/drawable/ic_outline_forward_to_inbox_24.xml" value="0.1105" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/drawable/ic_outline_list_alt_24.xml" value="0.1105" />
@@ -42,7 +43,7 @@
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/register.xml" value="0.264" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/report.xml" value="0.1766304347826087" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/report_create.xml" value="0.264" />
-        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/report_detail.xml" value="0.264" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/report_detail.xml" value="0.2" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/report_item_list.xml" value="0.4" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/report_main.xml" value="0.176" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/report_menu.xml" value="0.1766304347826087" />
@@ -52,6 +53,7 @@
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/layout/write_detail.xml" value="0.264" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/menu/bottom_menu.xml" value="0.146875" />
         <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/menu/menu.xml" value="0.27447916666666666" />
+        <entry key="..\:/Users/ghkdd/AndroidStudioProjects/register/app/src/main/res/menu/menuanswer.xml" value="0.1" />
       </map>
     </option>
   </component>

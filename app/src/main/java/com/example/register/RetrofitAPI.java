@@ -6,6 +6,8 @@ import com.example.register.domain.BoardDTO;
 import com.example.register.domain.BoardReceivedDTO;
 import com.example.register.domain.Member;
 import com.example.register.domain.MemberDTO;
+import com.example.register.domain.ReportAnswerDTO;
+import com.example.register.domain.ReportAnswerReceivedDTO;
 import com.example.register.domain.ReportDTO;
 import com.example.register.domain.ReportReceivedDTO;
 
@@ -66,10 +68,6 @@ public interface RetrofitAPI {
     @GET("create/answer/{boardid}")
     Call<List<AnswerReceivedDTO>> getAnswer(@Path("boardid") int boardId);
 
-    // 내 댓글 받아오기
-    @GET("create/myanswer/{memberid}")
-    Call<AnswerReceivedDTO> getMyAnswer(@Path("memberid") String memberId);
-
     // 글 수정
     @PATCH("update/")
     Call<BoardDTO> updateBoard(@Body BoardDTO boardDTO);
@@ -106,7 +104,15 @@ public interface RetrofitAPI {
     @GET("create/my/{memberid}")
     Call<List<ReportReceivedDTO>> getMyReport(@Path("memberid") String memberId);
 
-    //게시글 검색
+    // 게시글 검색
     @GET("search/{keyword}")
     Call<List<BoardReceivedDTO>> searchBoard(@Path("keyword") String keyword);
+
+    // 신고 댓글 작성
+    @POST("create/answer/")
+    Call<ReportAnswerDTO> createReportAnswer(@Body ReportAnswerDTO reportAnswerDTO);
+
+    // 신고 댓글 전체 받아오기
+    @GET("create/answer/{reportid}")
+    Call<List<ReportAnswerReceivedDTO>> getReportAnswer(@Path("reportid") int reportId);
 }

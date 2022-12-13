@@ -77,6 +77,7 @@ public class ReportMainActivity extends AppCompatActivity {
                 Log.e("신고 글 작성", "click!!!!!!!!!!");
                 Intent intent = new Intent(ReportMainActivity.this, ReportCreateActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
             }
         });
 

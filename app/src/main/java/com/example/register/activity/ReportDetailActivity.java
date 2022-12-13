@@ -11,27 +11,39 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.register.R;
 import com.example.register.RetrofitAPI;
+import com.example.register.domain.AnswerDTO;
+import com.example.register.domain.AnswerReceivedDTO;
 import com.example.register.domain.BoardDTO;
 import com.example.register.domain.BoardReceivedDTO;
 import com.example.register.domain.Member;
+import com.example.register.domain.ReportAnswerDTO;
+import com.example.register.domain.ReportAnswerReceivedDTO;
 import com.example.register.domain.ReportDTO;
 import com.example.register.domain.ReportReceivedDTO;
+import com.example.register.listview.ListViewAdapter;
+import com.example.register.listview.ListViewItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,11 +56,15 @@ public class ReportDetailActivity extends AppCompatActivity {
     private String TAG_MYWRITE = "mywrite_fragment";
     private String TAG_REPORT = "report_fragment";
     private String TAG_MYREPORT = "myreport_fragment";
-    private BottomNavigationView bottomNavigationView;
     private TextView txtMemberId, txtTitle, txtContent, txtAttackerNickname;
-    private ImageButton btnBack, btnMenu;
+    private ImageButton btnBack, btnMenu, btnSend;
     private String createDate, modifyDate;
     private int boardId;
+    private EditText con;
+    private LinearLayoutManager linearLayoutManager;
+    private ArrayList<ListViewItem> listarr;
+    private ListViewAdapter listViewAdapter;
+    private ListView listView1;
     private final String MYIP = "http://192.168.2.28";
     private final String FRIP = "http://192.168.3.134";
     private final String RESTIP = "http://172.16.153.145";
@@ -60,6 +76,7 @@ public class ReportDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.report_detail);
         getSupportActionBar().setTitle("시간어때");
+        init();
 
         // 레트로핏 설정
         Retrofit retrofit = new Retrofit.Builder()
@@ -68,16 +85,19 @@ public class ReportDetailActivity extends AppCompatActivity {
                 .build();
         retrofitAPI = retrofit.create(RetrofitAPI.class);
 
-        init();
+
 
         getClickReport(boardId);
+        getReportAnswer(boardId);
+
 
         // 뒤로가기 버튼 눌렀을때
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ReportDetailActivity.this, MainActivity.class);
+                Intent intent = new Intent(ReportDetailActivity.this, ReportMainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
             }
         });
 
@@ -100,6 +120,7 @@ public class ReportDetailActivity extends AppCompatActivity {
                             intent.putExtra("boardId", String.valueOf(boardId));
                             intent.putExtra("reportDTO", reportDTO);
                             startActivity(intent);
+                            overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
 
                         } else if (menuItem.getItemId() == R.id.btnDelete) {
                             // 삭제 클릭
@@ -112,6 +133,7 @@ public class ReportDetailActivity extends AppCompatActivity {
                                     deleteReport();
                                     Intent intent = new Intent(ReportDetailActivity.this, MainActivity.class);
                                     startActivity(intent);
+                                    overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
                                 }
                             });
 
@@ -134,6 +156,22 @@ public class ReportDetailActivity extends AppCompatActivity {
             }
         });
 
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (con.length() == 0) {
+                    Toast.makeText(getApplicationContext(), "댓글을 입력해주세요.", LENGTH_SHORT).show();
+                } else {
+                    createReportAnswer();
+                    Intent intent = getIntent();
+                    finish(); //현재 액티비티 종료 실시
+                    overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
+                    startActivity(intent); //현재 액티비티 재실행 실시
+                    overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
+                }
+            }
+        });
+
     }
 
     private void init() {
@@ -143,9 +181,12 @@ public class ReportDetailActivity extends AppCompatActivity {
         txtAttackerNickname = (TextView) findViewById(R.id.txtAttackerNickname);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnMenu = (ImageButton) findViewById(R.id.btnMenu);
-        bottomNavigationView = findViewById(R.id.bottomNavi);
         Intent boardIdIntent = getIntent();
         boardId = Integer.parseInt(boardIdIntent.getStringExtra("boardId"));
+        con = (EditText) findViewById(R.id.con);
+        btnSend = (ImageButton) findViewById(R.id.send);
+        listarr = new ArrayList<>();
+        listView1 = (ListView) findViewById(R.id.listView1);
 
     }
 
@@ -198,6 +239,61 @@ public class ReportDetailActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("Response", "실패!!!!!!!!");
+            }
+        });
+    }
+
+    // 신고 댓글 생성
+    private void createReportAnswer() {
+
+        ReportAnswerDTO reportAnswerDTO = new ReportAnswerDTO(con.getText().toString(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"))
+                , Member.getInstance().getStudentNum(), boardId);
+
+        Call<ReportAnswerDTO> call = retrofitAPI.createReportAnswer(reportAnswerDTO);
+
+        call.enqueue(new Callback<ReportAnswerDTO>() {
+            @Override
+            public void onResponse(Call<ReportAnswerDTO> call, Response<ReportAnswerDTO> response) {
+                Log.e("댓글쓰기", "댓글쓰기성공!!");
+                if (!response.isSuccessful()) {
+                    Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT);
+                    return;
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ReportAnswerDTO> call, Throwable t) {
+                Log.e("글쓰기", "글쓰기실패ㅠㅠ");
+                t.printStackTrace();
+            }
+        });
+
+    }
+
+    // 신고 댓글 받아오기
+    private void getReportAnswer(int boardId) {
+        Call<List<ReportAnswerReceivedDTO>> call = retrofitAPI.getReportAnswer(boardId);
+
+        call.enqueue(new Callback<List<ReportAnswerReceivedDTO>>() {
+            @Override
+            public void onResponse(Call<List<ReportAnswerReceivedDTO>> call, Response<List<ReportAnswerReceivedDTO>> response) {
+                if (!response.isSuccessful()) {
+                    Log.e("Response", "실패!!!!!!!!@");
+                    return;
+                }
+                Log.e("Response", "성공!!!!!!!!");
+                List<ReportAnswerReceivedDTO> answer = response.body();
+                for(ReportAnswerReceivedDTO post : answer) {
+                    listarr.add(new ListViewItem(post.getMemberId().getNickname(), post.getCreateDate(), post.getContent(), post.getId()));
+                }
+                listViewAdapter = new ListViewAdapter(listarr);
+                listView1.setAdapter(listViewAdapter);
+
+            }
+            @Override
+            public void onFailure(Call<List<ReportAnswerReceivedDTO>> call, Throwable t) {
                 Log.e("Response", "실패!!!!!!!!");
             }
         });

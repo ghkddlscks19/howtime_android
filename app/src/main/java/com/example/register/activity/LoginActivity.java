@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
             }
         });
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                     loginMember();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
                 }
             }
 
@@ -120,6 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
                 }
 
             }

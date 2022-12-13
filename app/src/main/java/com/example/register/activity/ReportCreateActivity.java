@@ -72,8 +72,9 @@ public class ReportCreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.e("뒤로가기버튼", "click!!");
-                Intent intent = new Intent(ReportCreateActivity.this, MainActivity.class);
+                Intent intent = new Intent(ReportCreateActivity.this, ReportMainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
             }
         });
 
@@ -87,6 +88,7 @@ public class ReportCreateActivity extends AppCompatActivity {
                     createReport();
                     Intent intent = new Intent(ReportCreateActivity.this, ReportMainActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
                 }
             }
         });

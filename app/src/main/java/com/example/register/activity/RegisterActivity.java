@@ -118,6 +118,7 @@ public class RegisterActivity extends AppCompatActivity {
                     createMember();
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
                 }
             }
         });
@@ -171,6 +172,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
             }
         });
 

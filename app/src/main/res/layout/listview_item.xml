@@ -30,18 +30,6 @@
             android:text="닉네임"
             android:textSize="15dp" />
 
-        <ImageButton
-            android:id="@+id/imabtnMenu"
-            android:layout_width="30dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginLeft="150dp"
-            android:adjustViewBounds="true"
-            android:background="@color/white"
-            android:scaleType="fitCenter"
-            android:src="@drawable/menu"
-            android:visibility="invisible"/>
-
     </LinearLayout>
 
 

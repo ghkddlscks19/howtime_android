@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.register.R;
@@ -75,15 +76,4 @@ public class ListViewAdapter extends BaseAdapter {
         return  listViewItemList.get(position);
     }
 
-//    //아이템 데이터 추가를 위한 함수
-//    public void addItem(String editnickname,String editdate,String editcom, int editid){
-//        ListViewItem item = new ListViewItem(editnickname, editdate, editcom, editid);
-//
-//        item.setEditnickname(editnickname);
-//        item.setEditdate(editdate);
-//        item.setEditcom(editcom);
-//        item.setEditid(editid);
-//
-//        listViewItemList.add(item);
-//    }
 }

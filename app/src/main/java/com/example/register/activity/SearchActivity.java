@@ -59,6 +59,7 @@ public class SearchActivity extends AppCompatActivity {
                 Intent intent = new Intent(SearchActivity.this, SearchDetailActivity.class);
                 intent.putExtra("keyword", editSearch.getText().toString());
                 startActivity(intent);
+                overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
 
             }
         });
@@ -68,6 +69,7 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(SearchActivity.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
             }
         });
 

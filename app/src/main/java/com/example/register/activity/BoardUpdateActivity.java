@@ -73,6 +73,7 @@ public class BoardUpdateActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(BoardUpdateActivity.this, MainActivity.class);
                 startActivity(intent);
+                overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
             }
         });
 
@@ -86,6 +87,7 @@ public class BoardUpdateActivity extends AppCompatActivity {
                     updateBoard();
                     Intent intent = new Intent(BoardUpdateActivity.this, MainActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(0, 0); //인텐트 애니메이션 없애기
                 }
 
             }
