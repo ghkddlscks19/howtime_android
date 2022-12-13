@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/layout_background"
     tools:context=".activity.ReportDetailActivity"
 
     >
 
 
     <LinearLayout
+        android:background="@drawable/layout_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -54,6 +56,8 @@
         android:layout_weight="1">
 
         <LinearLayout
+
+            android:background="@drawable/layout_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -128,6 +132,7 @@
                 android:background="#000001"/>
 
             <ListView
+
                 android:dividerHeight="5dp"
                 android:divider="@color/black"
                 android:id="@+id/listView1"
@@ -169,12 +174,4 @@
 
     </LinearLayout>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomnavi"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            app:itemIconTint="#000000"
-            app:itemTextColor="#000000"
-            app:menu="@menu/bottom_menu" />
 </LinearLayout>

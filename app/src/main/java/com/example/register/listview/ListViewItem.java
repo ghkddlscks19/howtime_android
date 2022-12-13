@@ -3,28 +3,35 @@ package com.example.register.listview;
 public class ListViewItem {
 
     private String editnicknameStr; //리스트뷰 닉네임
-    private String editmenuStr; //리스트뷰 수정 삭제 메뉴
+    private String editdateStr; //
     private String editcomStr; //리스트뷰 댓글
-    private String editidStr; //댓글의 아이디
+    private int editid; //댓글의 아이디
 
     public void setEditnickname(String editNickname){
         editnicknameStr = editNickname;
     }
-    public void setEditmenu(String editmenu){
-        editmenuStr = editmenu;
+    public void setEditdate(String editdate){
+        editdateStr = editdate;
     }
     public void setEditcom(String editcom){
         editcomStr = editcom;
     }
-    public void setEditid(String editid) { editidStr = editid; }
+    public void setEditid(int editid) { this.editid = editid; }
 
 
     public String getEditNickname(){
         return this.editnicknameStr;
     }
-    public String getEditmenu() { return this.editmenuStr; }
+    public String getEditdate() { return this.editdateStr; }
     public String getEditcom(){
         return this.editcomStr;
     }
-    public String getEditid() { return this.editidStr; }
+    public int getEditid() { return this.editid; }
+
+    public ListViewItem(String editnicknameStr, String editdateStr, String editcomStr, int editid) {
+        this.editnicknameStr = editnicknameStr;
+        this.editdateStr = editdateStr;
+        this.editcomStr = editcomStr;
+        this.editid = editid;
+    }
 }

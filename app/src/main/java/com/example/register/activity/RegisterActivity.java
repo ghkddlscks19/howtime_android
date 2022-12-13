@@ -31,14 +31,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    EditText studentNum, regPassword, checkPassword,
-            editName, editNickname, editEmail, editKey;
-    Button checkStudentNum, sendEmail, certKey, reg, checkEmail, checkNickname;
-    RadioGroup radioGroup;
-    RadioButton radioMan, radioWoman;
-    ImageButton btnBack;
-    String genderResult = "", code; //code는 이메일 인증코드 담을 변수
-    Boolean completeStudentNum = false, completeEmail = false, completeCert = false, completeNickname = false;
+    private EditText studentNum, regPassword, editName, editNickname, editEmail, editKey;
+    private Button checkStudentNum, sendEmail, certKey, reg, checkEmail, checkNickname;
+    private RadioGroup radioGroup;
+    private RadioButton radioMan, radioWoman;
+    private ImageButton btnBack;
+    private String genderResult = "", code; //code는 이메일 인증코드 담을 변수
+    private Boolean completeStudentNum = false, completeEmail = false, completeCert = false, completeNickname = false;
 
     private final String MYIP = "http://192.168.2.28";
     private final String FRIP = "http://192.168.3.134";
@@ -49,7 +48,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
-        getSupportActionBar().setTitle("회원가입");
+        getSupportActionBar().setTitle("시간어때");
         init();
 
         //레트로핏 설정

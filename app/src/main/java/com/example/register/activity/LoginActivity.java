@@ -24,8 +24,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText editId, editPassword;
-    Button btnLogin, btnRegister;
+
+    private EditText editId, editPassword;
+    private Button btnLogin, btnRegister;
     private final String MYIP = "http://192.168.2.28";
     private final String FRIP = "http://192.168.3.134";
     private final String RESTIP = "http://172.16.153.145";
@@ -37,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
         init();
-        getSupportActionBar().setTitle("로그인");
+        getSupportActionBar().setTitle("시간어때");
 
         //레트로핏 설정
         Retrofit retrofit = new Retrofit.Builder()

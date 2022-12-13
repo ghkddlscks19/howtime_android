@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.SearchActivity"
+    android:background="@drawable/layout_background"
+    >
+
+
+    <LinearLayout
+        android:background="@drawable/layout_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="15dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:background="@drawable/layout_background"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageButton
+                android:background="@null"
+                android:id="@+id/btnBack"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_baseline_keyboard_backspace_24" />
+
+            <EditText
+                android:id="@+id/editsearch"
+                android:layout_width="274dp"
+                android:layout_height="wrap_content"
+                android:hint="제목, 내용, 해시태그 검색" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonsearch"
+                ></Button>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomnavi"
+        android:background="@drawable/layout_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:itemIconTint="#000000"
+        app:itemTextColor="#000000"
+        app:menu="@menu/bottom_menu" />
+
+</LinearLayout>

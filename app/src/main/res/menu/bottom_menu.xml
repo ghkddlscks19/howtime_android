@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
         android:id="@+id/home"
         android:enabled="true"
@@ -15,7 +16,13 @@
     <item
         android:id="@+id/report"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_report_24"
+        android:icon="@drawable/ic_baseline_edit_notifications_24"
         android:title="신고게시판" />
+
+    <item
+        android:id="@+id/mreport"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_report_24"
+        android:title="내 신고글" />
 
 </menu>

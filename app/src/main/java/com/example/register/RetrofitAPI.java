@@ -59,12 +59,16 @@ public interface RetrofitAPI {
     Call<BoardReceivedDTO> getClickBoard(@Path("boardid") int boardId);
 
     // 댓글 작성
-    @POST("create/")
+    @POST("create/answer/")
     Call<AnswerDTO> createAnswer(@Body AnswerDTO answerDTO);
 
     // 댓글 전체 받아오기
-    @GET("create/{boardid}")
-    Call<AnswerReceivedDTO> getAnswer(@Path("boardid") int boardId);
+    @GET("create/answer/{boardid}")
+    Call<List<AnswerReceivedDTO>> getAnswer(@Path("boardid") int boardId);
+
+    // 내 댓글 받아오기
+    @GET("create/myanswer/{memberid}")
+    Call<AnswerReceivedDTO> getMyAnswer(@Path("memberid") String memberId);
 
     // 글 수정
     @PATCH("update/")
@@ -101,4 +105,8 @@ public interface RetrofitAPI {
     // 내 신고 글 보기
     @GET("create/my/{memberid}")
     Call<List<ReportReceivedDTO>> getMyReport(@Path("memberid") String memberId);
+
+    //게시글 검색
+    @GET("search/{keyword}")
+    Call<List<BoardReceivedDTO>> searchBoard(@Path("keyword") String keyword);
 }

@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +27,8 @@ import com.example.register.domain.BoardReceivedDTO;
 import com.example.register.domain.Member;
 import com.example.register.domain.ReportDTO;
 import com.example.register.domain.ReportReceivedDTO;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -36,10 +40,15 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ReportDetailActivity extends AppCompatActivity {
-    TextView txtMemberId, txtTitle, txtContent, txtAttackerNickname;
-    ImageButton btnBack, btnMenu;
-    String createDate, modifyDate;
-    int boardId;
+    private String TAG_HOME = "home_fragment";
+    private String TAG_MYWRITE = "mywrite_fragment";
+    private String TAG_REPORT = "report_fragment";
+    private String TAG_MYREPORT = "myreport_fragment";
+    private BottomNavigationView bottomNavigationView;
+    private TextView txtMemberId, txtTitle, txtContent, txtAttackerNickname;
+    private ImageButton btnBack, btnMenu;
+    private String createDate, modifyDate;
+    private int boardId;
     private final String MYIP = "http://192.168.2.28";
     private final String FRIP = "http://192.168.3.134";
     private final String RESTIP = "http://172.16.153.145";
@@ -50,7 +59,7 @@ public class ReportDetailActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.report_detail);
-        getSupportActionBar().setTitle("신고 글 세부 보기");
+        getSupportActionBar().setTitle("시간어때");
 
         // 레트로핏 설정
         Retrofit retrofit = new Retrofit.Builder()
@@ -134,8 +143,10 @@ public class ReportDetailActivity extends AppCompatActivity {
         txtAttackerNickname = (TextView) findViewById(R.id.txtAttackerNickname);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnMenu = (ImageButton) findViewById(R.id.btnMenu);
+        bottomNavigationView = findViewById(R.id.bottomNavi);
         Intent boardIdIntent = getIntent();
         boardId = Integer.parseInt(boardIdIntent.getStringExtra("boardId"));
+
     }
 
     // 게시글 클릭했을때
@@ -191,4 +202,5 @@ public class ReportDetailActivity extends AppCompatActivity {
             }
         });
     }
+
 }

@@ -3,11 +3,14 @@ package com.example.register.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +32,7 @@ import com.example.register.recyclerview.MainAdapter;
 import com.example.register.recyclerview.MainData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +44,10 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MyBoardActivity extends AppCompatActivity {
+    private String TAG_HOME = "home_fragment";
+    private String TAG_MYWRITE = "mywrite_fragment";
+    private String TAG_REPORT = "report_fragment";
+    private String TAG_MYREPORT = "myreport_fragment";
     private ArrayList<MainData> arrayList;
     private MainAdapter myBoardAdapter;
     private RecyclerView recyclerView;
@@ -47,9 +55,7 @@ public class MyBoardActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private FragmentManager fm;
     private FragmentTransaction ft;
-    RetrofitAPI retrofitAPI;
-    Button btnMain;
-    ToggleButton btnMyToggle;
+    private RetrofitAPI retrofitAPI;
     private final String MYIP = "http://192.168.2.28";
     private final String FRIP = "http://192.168.3.134";
     private final String RESTIP = "http://172.16.153.145";
@@ -59,6 +65,7 @@ public class MyBoardActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.myboard);
+        getSupportActionBar().setTitle("시간어때");
 
         // 레트로핏 설정
         Retrofit retrofit = new Retrofit.Builder()
@@ -70,31 +77,12 @@ public class MyBoardActivity extends AppCompatActivity {
         init();
         getMyBoard(Member.getInstance().getStudentNum());
 
-        btnMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MyBoardActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnMyToggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    Intent intent = new Intent(MyBoardActivity.this, MyReportActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
     }
 
     private void init(){
-        btnMain = (Button) findViewById(R.id.btnMain);
         recyclerView = (RecyclerView) findViewById(R.id.rv);
         arrayList = new ArrayList<>();
         bottomNavigationView = findViewById(R.id.bottomNavi);
-        btnMyToggle = (ToggleButton) findViewById(R.id.btnMyToggle);
     }
 
     private void getMyBoard(String memberId) {

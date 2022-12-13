@@ -3,12 +3,15 @@ package com.example.register.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +21,8 @@ import com.example.register.domain.Board;
 import com.example.register.domain.BoardDTO;
 import com.example.register.domain.BoardReceivedDTO;
 import com.example.register.domain.Member;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -30,24 +35,29 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Path;
 
 public class BoardUpdateActivity extends AppCompatActivity {
+    private String TAG_HOME = "home_fragment";
+    private String TAG_MYWRITE = "mywrite_fragment";
+    private String TAG_REPORT = "report_fragment";
+    private String TAG_MYREPORT = "myreport_fragment";
+    private BottomNavigationView bottomNavigationView;
     private final String MYIP = "http://192.168.2.28";
     private final String FRIP = "http://192.168.3.134";
     private final String RESTIP = "http://172.16.153.145";
     private final String BASEURL = FRIP+":9090/board/";
-    int boardId;
-    BoardDTO boardDTO;
+    private int boardId;
+    private BoardDTO boardDTO;
     private RetrofitAPI retrofitAPI;
 
-    EditText editTitle, editContent, editRequirement, editHashtag1, editHashtag2, editPrice;
-    Button btnWrite;
-    ImageButton btnBack;
+    private EditText editTitle, editContent, editRequirement, editHashtag1, editHashtag2, editPrice;
+    private Button btnWrite;
+    private ImageButton btnBack;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.board_update);
-        getSupportActionBar().setTitle("글 수정");
+        getSupportActionBar().setTitle("시간어때");
         init();
 
         // 레트로핏 설정
@@ -81,6 +91,7 @@ public class BoardUpdateActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     private void init() {
@@ -92,6 +103,7 @@ public class BoardUpdateActivity extends AppCompatActivity {
         editPrice = (EditText) findViewById(R.id.editPrice);
         btnBack = (ImageButton) findViewById(R.id.btnBack);
         btnWrite = (Button) findViewById(R.id.btnWrite);
+        bottomNavigationView = findViewById(R.id.bottomNavi);
 
         // 글 상세보기 값 받아오기
         Intent boardInfoIntent = getIntent();
@@ -141,6 +153,5 @@ public class BoardUpdateActivity extends AppCompatActivity {
         });
 
     }
-
 
 }

@@ -4,6 +4,9 @@ package com.example.register.domain;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Answer {
 
     @SerializedName("id")
@@ -14,6 +17,10 @@ public class Answer {
     @Expose
     private String content;
 
+    @SerializedName("createDate")
+    @Expose
+    private String createDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss"));
+
     @SerializedName("memberId")
     @Expose
     private MemberDTO memberId;
@@ -22,11 +29,20 @@ public class Answer {
     @Expose
     private int boardId;
 
-    public Answer(int id, String content, MemberDTO memberId, int boardId) {
+    public Answer(int id, String content, String createDate, MemberDTO memberId, int boardId) {
         this.id = id;
         this.content = content;
+        this.createDate = createDate;
         this.memberId = memberId;
         this.boardId = boardId;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
     }
 
     public int getId() {

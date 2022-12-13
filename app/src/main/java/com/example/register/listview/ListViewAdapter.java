@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class ListViewAdapter extends BaseAdapter {
 
     private TextView editnickname1;
-    private TextView editmenu1;
+    private TextView editdate1;
     private TextView editcom1;
     private TextView editid1;
 
@@ -23,8 +23,8 @@ public class ListViewAdapter extends BaseAdapter {
     private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>();
 
     //ListViewAdapter의 생성자
-    public  ListViewAdapter(){
-
+    public ListViewAdapter(ArrayList<ListViewItem> listViewItemList) {
+        this.listViewItemList = listViewItemList;
     }
 
     //Adapter에 사용되는 데이터의 개수를 리턴
@@ -47,7 +47,7 @@ public class ListViewAdapter extends BaseAdapter {
 
         //화면에 표시될 view(layout이 inflate된)으로부터 위젯에 대한 참조 획득
         editnickname1 = (TextView) convertView.findViewById(R.id.editnickname);
-        editmenu1 = (TextView) convertView.findViewById(R.id.editmenu);
+        editdate1 = (TextView) convertView.findViewById(R.id.editdate);
         editcom1 = (TextView) convertView.findViewById(R.id.editcom);
         editid1 = (TextView) convertView.findViewById(R.id.editid);
 
@@ -55,9 +55,9 @@ public class ListViewAdapter extends BaseAdapter {
 
         //아이템 내 각 위젯에 데이터 반영
         editnickname1.setText(listViewItem.getEditNickname());
-        editmenu1.setText(listViewItem.getEditmenu());
+        editdate1.setText(listViewItem.getEditdate());
         editcom1.setText(listViewItem.getEditcom());
-        editid1.setText(listViewItem.getEditid());
+        editid1.setText(String.valueOf(listViewItem.getEditid()));
 
         return convertView;
 
@@ -75,15 +75,15 @@ public class ListViewAdapter extends BaseAdapter {
         return  listViewItemList.get(position);
     }
 
-    //아이템 데이터 추가를 위한 함수
-    public void addItem(String editnickname,String editmenu,String editcom, String editid){
-        ListViewItem item = new ListViewItem();
-
-        item.setEditnickname(editnickname);
-        item.setEditmenu(editmenu);
-        item.setEditcom(editcom);
-        item.setEditid(editid);
-
-        listViewItemList.add(item);
-    }
+//    //아이템 데이터 추가를 위한 함수
+//    public void addItem(String editnickname,String editdate,String editcom, int editid){
+//        ListViewItem item = new ListViewItem(editnickname, editdate, editcom, editid);
+//
+//        item.setEditnickname(editnickname);
+//        item.setEditdate(editdate);
+//        item.setEditcom(editcom);
+//        item.setEditid(editid);
+//
+//        listViewItemList.add(item);
+//    }
 }

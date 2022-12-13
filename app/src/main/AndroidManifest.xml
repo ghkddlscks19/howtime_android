@@ -29,5 +29,7 @@
         <activity android:name=".activity.ReportDetailActivity" ></activity>
         <activity android:name=".activity.ReportUpdateActivity"></activity>
         <activity android:name=".activity.MyReportActivity"></activity>
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.SearchDetailActivity" />
     </application>
 </manifest>

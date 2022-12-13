@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/layout_background"
     android:orientation="vertical"
     tools:context=".activity.ReportCreateActivity"
 
@@ -11,6 +12,7 @@
 
 
     <LinearLayout
+        android:background="@drawable/layout_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -47,6 +49,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:background="@drawable/layout_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -118,17 +121,9 @@
     </LinearLayout>
 
     <LinearLayout
+        android:background="@drawable/layout_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="bottom" />
-
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomnavi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:itemIconTint="#000000"
-        app:itemTextColor="#000000"
-        app:menu="@menu/bottom_menu" />
+    
 </LinearLayout>
